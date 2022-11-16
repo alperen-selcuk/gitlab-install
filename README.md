@@ -30,3 +30,23 @@ runner kurulduktan sonra toml dosyasında priviled yapmamız gerekiyor.
 ```
 sed -i 's,privileged = false,privileged = true,g' /etc/gitlab-runner/config.toml
 ```
+
+örnek gitlab-ci yaml için
+
+
+```
+image: alpine
+stages:
+    - test
+test:
+    image: docker
+    services: 
+        - name: docker:20-dind
+          alias: docker
+          command: ["--tls=false"]
+    stage: test
+    script:
+        - sleep 5
+        - echo "hello gitlab-ci"
+    tags: 
+        - docker-runner
