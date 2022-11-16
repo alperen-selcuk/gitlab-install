@@ -1,0 +1,24 @@
+image: alpine
+stages:
+    - build_image
+
+variables:
+    IMAGE: "hasanalperen/hello-gitlab"
+    VERS: $CI_COMMIT_SHORT_SHA
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_TLS_CERTDIR: ""
+build_image:
+    image: docker
+    services: 
+        - name: docker:20-dind
+          alias: docker
+          command: ["--tls=false"]
+    stage: build_image
+    script:
+        - sleep 5
+        - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS
+        - docker build -t $IMAGE:$VERS .
+        - docker push $IMAGE:$VERS
+    tags: 
+        - docker-runner
