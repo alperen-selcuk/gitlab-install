@@ -3,7 +3,7 @@
 container üzerinde kurmak için.
 
 ```mkdir gitlab
-docker run -d --hostname gitlab.devops.expert \
+docker run -d --hostname gitlab.dev-ops.expert \
 -p 443:443 -p 80:80 -p 2222:22 \
 --name gitlab \
 --restart unless-stopped \
