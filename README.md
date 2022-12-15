@@ -25,7 +25,9 @@ docker run -d --name gitlab-runner --restart always \
     gitlab/gitlab-runner:v14.7.0
 ``` 
 
-runner kurulduktan sonra toml dosyasında priviled yapmamız gerekiyor.
+runner kurulumdan sonra gitlab-runner register diyerek gitlab hostname i ve gitlab arayüzünden aldığımız token ile register oluyoruz.
+
+ardından toml dosyasında priviled yapmamız gerekiyor.
 
 ```
 sed -i 's,privileged = false,privileged = true,g' /etc/gitlab-runner/config.toml
